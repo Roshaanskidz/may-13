@@ -6,10 +6,9 @@
     <title>A little surprise for you ✨</title>
     <style>
         :root {
-            --soft-pink: #ffdae9;
+            --soft-pink: #fce4ec;
             --deep-pink: #ff85a1;
-            --soft-purple: #f3e5f5;
-            --white: #ffffff;
+            --text-color: #d81b60;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Comfortaa', cursive, sans-serif; }
@@ -23,72 +22,54 @@
             overflow: hidden;
         }
 
-        /* --- Floating Hearts Background --- */
         .heart {
-            position: absolute;
-            color: var(--deep-pink);
-            opacity: 0.3;
-            animation: floatUp var(--d) linear infinite;
-            z-index: 1;
+            position: absolute; color: var(--deep-pink); opacity: 0.3;
+            animation: floatUp var(--d) linear infinite; z-index: 1;
         }
 
         @keyframes floatUp {
             0% { transform: translateY(100vh) scale(0); opacity: 0; }
             50% { opacity: 0.5; }
-            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-        /* --- Cute Aesthetic Card --- */
         #card {
             position: relative; z-index: 10;
             width: 85%; max-width: 340px;
             padding: 35px 20px;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-radius: 30px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(255, 133, 161, 0.2);
-            border: 2px solid var(--white);
+            box-shadow: 0 10px 30px rgba(255, 133, 161, 0.15);
+            border: 2px solid white;
         }
 
-        .sticker {
-            width: 120px; height: 120px; margin-bottom: 20px;
-            animation: bounce 3s ease-in-out infinite;
-        }
+        .sticker { width: 120px; height: 120px; margin-bottom: 20px; animation: bounce 3s ease-in-out infinite; border-radius: 15px; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        h1 { color: #d81b60; font-size: 1.2rem; font-weight: 600; margin-bottom: 25px; line-height: 1.5; }
+        h1 { color: var(--text-color); font-size: 1.2rem; margin-bottom: 25px; line-height: 1.4; }
 
         .btn-stack { display: flex; flex-direction: column; gap: 12px; }
 
         button {
-            padding: 15px; border-radius: 20px; border: none;
+            padding: 16px; border-radius: 20px; border: none;
             font-size: 1rem; font-weight: 600; cursor: pointer;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        #yesBtn { background: #ff85a1; color: white; box-shadow: 0 4px 15px rgba(255, 133, 161, 0.4); }
-        #noBtn { background: #fce4ec; color: #ff85a1; }
+        #yesBtn { background: var(--deep-pink); color: white; }
+        #noBtn { background: #fff1f6; color: var(--deep-pink); border: 1px solid #ffdae9; }
 
-        /* --- Cute Loading Text --- */
-        #loader { display: none; color: #ff85a1; font-weight: 600; font-size: 1rem; }
-
-        /* --- Fullscreen Reveal --- */
         #reveal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: black; z-index: 100; opacity: 0;
             transition: opacity 1s ease; pointer-events: none;
         }
         #reveal.active { opacity: 1; pointer-events: all; }
-
         video { width: 100%; height: 100%; object-fit: cover; }
     </style>
-    <!-- Importing a cute font -->
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -97,29 +78,27 @@
 
     <div id="card">
         <div id="content">
-            <img src="sticker.png" class="sticker" alt="Cute Sticker">
+            <!-- Using your specific image filename here -->
+            <img src="IMG_1579.jpeg" class="sticker" alt="Sticker">
             <h1>I have a little gift for you...<br>Do you want to see it? ✨</h1>
             <div class="btn-stack">
                 <button id="yesBtn" onclick="startReveal()">Yes, please! 💗</button>
                 <button id="noBtn" onmouseover="runAway()" onclick="runAway()">Maybe later</button>
             </div>
         </div>
-
-        <div id="loader">
-            <p id="loadText">Preparing your surprise... ✨</p>
-        </div>
     </div>
 
     <div id="reveal">
         <video id="vid" playsinline>
-            <source src="may13.mp4" type="video/mp4">
+            <!-- Using your specific video filename here -->
+            <source src="copy_2F1368E7-0D0E-47CD-843D-7F984CF24471.mov" type="video/quicktime">
+            <source src="copy_2F1368E7-0D0E-47CD-843D-7F984CF24471.mov" type="video/mp4">
         </video>
     </div>
 
     <script>
-        // Generate Floating Hearts
         const wrap = document.getElementById('heart-wrap');
-        const heartIcons = ['🌸', '✨', '💖', '☁️', '🌷'];
+        const heartIcons = ['🌸', '✨', '💖', '☁️'];
         for(let i=0; i<15; i++) {
             const h = document.createElement('div');
             h.className = 'heart';
@@ -130,42 +109,23 @@
             wrap.appendChild(h);
         }
 
-        let runCount = 0;
-        const funnyNotes = [
-            "Wait, come back! 😂",
-            "Wrong button! ✨",
-            "Try again, cutie 🌸",
-            "Nope! 😋",
-            "You have to say yes! 💖"
-        ];
-
         function runAway() {
             const noBtn = document.getElementById('noBtn');
             const x = Math.random() * (window.innerWidth - 100);
             const y = Math.random() * (window.innerHeight - 50);
-            
             noBtn.style.position = 'fixed';
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
-            
-            if(runCount < funnyNotes.length) {
-                noBtn.innerText = funnyNotes[runCount];
-                runCount++;
-            }
-            
-            if(runCount > 7) noBtn.style.display = 'none';
         }
 
         function startReveal() {
-            document.getElementById('content').style.display = 'none';
-            document.getElementById('loader').style.display = 'block';
-            
+            document.getElementById('card').style.opacity = '0';
             setTimeout(() => {
                 const reveal = document.getElementById('reveal');
                 const vid = document.getElementById('vid');
                 reveal.classList.add('active');
                 vid.play();
-            }, 1500); // Short cute delay
+            }, 500);
         }
     </script>
 </body>
